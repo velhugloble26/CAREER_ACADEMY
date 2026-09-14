@@ -6,7 +6,7 @@ import { Benefits, ContactStrip, CoursesGrid, EmptyAssetNote, EnquiryForm, Galle
 import { contact, t } from "@/data/site-content";
 
 export function HomePage() { const { lang } = useLanguage(); return <>
-  <Hero />
+      <Hero />
   <section className="section"><div className="site-container"><SectionHeading eyebrow={{ mr:"ध्येयाकडे नियोजनबद्ध वाटचाल", en:"A STRUCTURED PATH FORWARD" }} title={{ mr:"आमचे अभ्यासक्रम", en:"Our courses" }} copy={{ mr:"तुमच्या ध्येयाशी जुळणारे परीक्षाभिमुख मार्गदर्शन निवडा.", en:"Choose exam-focused guidance aligned with your goal." }} /><CoursesGrid /></div></section>
   <section className="section section-soft"><div className="site-container"><SectionHeading eyebrow={{mr:"आमची पद्धत",en:"OUR APPROACH"}} title={{mr:"सरकार करिअर अकॅडमी का निवडावी?",en:"Why choose Sarkar Career Academy?"}} align="center"/><Benefits /></div></section>
   <section className="section"><div className="site-container"><div className="heading-row"><SectionHeading eyebrow={{mr:"यशोगाथा",en:"STUDENT SUCCESS"}} title={{mr:"आमच्या विद्यार्थ्यांचे यश",en:"Our students’ success"}} copy={{mr:"सरकार करिअर अकॅडमीच्या विद्यार्थ्यांनी मिळवलेले यश",en:"Achievements earned by Sarkar Career Academy students"}}/><Link href="/success" className="text-link">{lang === "mr" ? "सर्व यशोगाथा पहा" : "View all success stories"}<ChevronRight /></Link></div><SuccessPreview/><EmptyAssetNote type="students"/></div></section>

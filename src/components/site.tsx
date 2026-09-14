@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { BookOpen, Building2, Check, ChevronRight, CircleCheck, GraduationCap, Images, Landmark, MapPin, Menu, MessageCircle, Phone, ShieldCheck, Target, X } from "lucide-react";
+import { BookOpen, Building2, Check, ChevronRight, CircleCheck, Facebook, GraduationCap, Images, Instagram, Landmark, MapPin, Menu, MessageCircle, Phone, ShieldCheck, Target, X, Youtube } from "lucide-react";
 import { createContext, useContext, useEffect, useState, type FormEvent, type ReactNode } from "react";
-import heroImage from "@/assets/career-academy-hero.jpg";
 import policeImage from "@/assets/police-training.jpg";
 import booksImage from "@/assets/study-material.jpg";
 import { benefits, contact, courses, nav, t, type Copy, type Language } from "@/data/site-content";
@@ -13,6 +12,9 @@ import { benefits, contact, courses, nav, t, type Copy, type Language } from "@/
 function imageSource(image: string | { src: string }) {
   return typeof image === "string" ? image : image.src;
 }
+
+const heroPoster = "/logos.png";
+const heroVideos = ["/career-academy-hero.mp4", "/career-academy-hero01.mp4"];
 
 const LanguageContext = createContext<{ lang: Language; setLang: (value: Language) => void }>({ lang: "mr", setLang: () => undefined });
 export const useLanguage = () => useContext(LanguageContext);
@@ -24,7 +26,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
 }
 
 export function Brand() {
-  return <Link href="/" className="brand" aria-label="Career Academy home"><span className="brand-mark" aria-hidden="true"><span>CA</span></span><span className="brand-copy"><strong>CAREER ACADEMY</strong><em>सरकार करिअर अकॅडमी</em></span></Link>;
+  return <Link href="/" className="brand" aria-label="Career Academy home"><img className="brand-logo" src="/logos.png" alt="Sarkar Career Academy" /></Link>;
 }
 
 export function Header() {
@@ -44,7 +46,7 @@ export function Header() {
 
 export function Footer() {
   const { lang } = useLanguage();
-  return <footer className="footer"><div className="site-container footer-grid"><div><Brand /><p>{lang === "mr" ? "स्पर्धा परीक्षा मार्गदर्शन प्रबोधिनी, नाशिक." : "Competitive exam guidance institute, Nashik."}</p></div><div><h3>{lang === "mr" ? "महत्त्वाचे दुवे" : "Quick links"}</h3>{nav.slice(0, 7).map(item => <Link key={item.to} href={item.to}>{t(item.label, lang)}</Link>)}</div><div><h3>{lang === "mr" ? "संपर्क" : "Contact"}</h3>{contact.phones.map(phone => <a key={phone} href={`tel:+91${phone}`}>{phone}</a>)}<p><MapPin size={17} />{t(contact.nashik, lang)}</p></div></div><div className="footer-bottom"><div className="site-container">© 2026 Career Academy · {lang === "mr" ? "सर्व हक्क राखीव" : "All rights reserved"}</div></div></footer>;
+  return <footer className="footer"><div className="site-container footer-grid"><div><Brand /><p>{lang === "mr" ? "स्पर्धा परीक्षा मार्गदर्शन प्रबोधिनी, नाशिक." : "Competitive exam guidance institute, Nashik."}</p></div><div><h3>{lang === "mr" ? "महत्त्वाचे दुवे" : "Quick links"}</h3>{nav.slice(0, 7).map(item => <Link key={item.to} href={item.to}>{t(item.label, lang)}</Link>)}</div><div><h3>{lang === "mr" ? "संपर्क" : "Contact"}</h3>{contact.phones.map(phone => <a key={phone} href={`tel:+91${phone}`}>{phone}</a>)}<p><MapPin size={17} />{t(contact.nashik, lang)}</p></div></div><div className="footer-social"><h3>{lang === "mr" ? "आमच्याशी संपर्क साधा" : "Connect with us"}</h3><div className="social-links"><a href="tel:+918805667100" aria-label="Call Career Academy" title="Call"><Phone /></a><a href="https://wa.me/918805667100" target="_blank" rel="noreferrer" aria-label="Career Academy on WhatsApp" title="WhatsApp"><MessageCircle /></a><a href="https://www.youtube.com" target="_blank" rel="noreferrer" aria-label="Career Academy on YouTube" title="YouTube"><Youtube /></a><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Career Academy on Instagram" title="Instagram"><Instagram /></a><a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Career Academy on Facebook" title="Facebook"><Facebook /></a></div></div><div className="footer-bottom"><div className="site-container">© 2026 Career Academy · {lang === "mr" ? "सर्व हक्क राखीव" : "All rights reserved"}</div></div></footer>;
 }
 
 export function MobileActions() {
@@ -65,7 +67,8 @@ export function SectionHeading({ eyebrow, title, copy, align = "left" }: { eyebr
 
 export function Hero() {
   const { lang } = useLanguage();
-  return <section className="hero"><img src={imageSource(heroImage)} alt={lang === "mr" ? "स्पर्धा परीक्षेची तयारी करणारे विद्यार्थी" : "Students preparing for competitive exams"} width={1600} height={1000} fetchPriority="high" /><div className="hero-shade" /><div className="site-container hero-content"><motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65 }}><div className="hero-kicker"><ShieldCheck size={18} />{lang === "mr" ? "स्पर्धा परीक्षा मार्गदर्शन प्रबोधिनी, नाशिक" : "Competitive Exam Guidance Institute, Nashik"}</div><h1>{lang === "mr" ? "स्पर्धा परीक्षेतील यशासाठी योग्य मार्गदर्शन" : "The right guidance for success in competitive exams"}</h1><p>{lang === "mr" ? "सरकार करिअर अकॅडमी, नाशिक — MPSC, PSI, TET आणि पोलीस भरती परीक्षांसाठी मार्गदर्शन." : "Sarkar Career Academy, Nashik — guidance for MPSC, PSI, TET and Police recruitment examinations."}</p><div className="hero-actions"><Link href="/contact" className="button button-primary">{lang === "mr" ? "प्रवेशासाठी संपर्क करा" : "Contact for admission"}<ChevronRight size={18} /></Link><Link href="/courses" className="button button-light">{lang === "mr" ? "अभ्यासक्रम पहा" : "View courses"}</Link></div><small><CircleCheck size={17} />{lang === "mr" ? "विद्यार्थ्यांच्या यशाला केंद्रस्थानी ठेवणारे मार्गदर्शन" : "Guidance that puts student success at the centre"}</small></motion.div></div></section>;
+  const [videoIndex, setVideoIndex] = useState(0);
+  return <section className="hero"><video key={videoIndex} className="hero-video" autoPlay muted playsInline poster={heroPoster} onEnded={() => setVideoIndex(current => (current + 1) % heroVideos.length)} aria-label={lang === "mr" ? "स्पर्धा परीक्षेची तयारी करणारे विद्यार्थी" : "Students preparing for competitive exams"}><source src={heroVideos[videoIndex] ?? heroVideos[0]} type="video/mp4" /></video><div className="hero-shade" /><div className="site-container hero-content"><motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65 }}><div className="hero-kicker"><ShieldCheck size={18} />{lang === "mr" ? "स्पर्धा परीक्षा मार्गदर्शन प्रबोधिनी, नाशिक" : "Competitive Exam Guidance Institute, Nashik"}</div><h1>{lang === "mr" ? "स्पर्धा परीक्षेतील यशासाठी योग्य मार्गदर्शन" : "The right guidance for success in competitive exams"}</h1><p>{lang === "mr" ? "सरकार करिअर अकॅडमी, नाशिक — MPSC, PSI, TET आणि पोलीस भरती परीक्षांसाठी मार्गदर्शन." : "Sarkar Career Academy, Nashik — guidance for MPSC, PSI, TET and Police recruitment examinations."}</p><div className="hero-actions"><Link href="/contact" className="button button-primary">{lang === "mr" ? "प्रवेशासाठी संपर्क करा" : "Contact for admission"}<ChevronRight size={18} /></Link><Link href="/courses" className="button button-light">{lang === "mr" ? "अभ्यासक्रम पहा" : "View courses"}</Link></div><small><CircleCheck size={17} />{lang === "mr" ? "विद्यार्थ्यांच्या यशाला केंद्रस्थानी ठेवणारे मार्गदर्शन" : "Guidance that puts student success at the centre"}</small></motion.div></div></section>;
 }
 
 const icons = [Landmark, ShieldCheck, GraduationCap, Target];
@@ -84,7 +87,7 @@ export function PageHero({ eyebrow, title, copy }: { eyebrow: Copy; title: Copy;
 export function ContactStrip() { const { lang } = useLanguage(); return <section className="contact-strip"><div className="site-container contact-strip-inner"><div><span>{lang === "mr" ? "पुढचे पाऊल आजच उचला" : "Take your next step today"}</span><h2>{lang === "mr" ? "योग्य परीक्षेसाठी योग्य मार्गदर्शन मिळवा" : "Get the right guidance for your exam"}</h2></div><div><a className="button button-light" href="tel:+918805667100"><Phone size={18}/>{lang === "mr" ? "कॉल करा" : "Call now"}</a><a className="button button-gold" href="https://wa.me/918805667100" target="_blank" rel="noreferrer"><MessageCircle size={18}/>WhatsApp</a></div></div></section>; }
 
 export const galleryItems = [
-  { category: "academy", image: heroImage, mr: "अकॅडमीतील अभ्यास", en: "Study at the academy" },
+  { category: "academy", image: heroPoster, mr: "अकॅडमीतील अभ्यास", en: "Study at the academy" },
   { category: "courses", image: policeImage, mr: "भरती प्रशिक्षण", en: "Recruitment training" },
   { category: "books", image: booksImage, mr: "अभ्यास साहित्य", en: "Study material" },
 ];

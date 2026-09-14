@@ -19,8 +19,8 @@ export const nav = [
   { to: "/about", label: { mr: "आमच्याबद्दल", en: "About" } },
   { to: "/courses", label: { mr: "अभ्यासक्रम", en: "Courses" } },
   { to: "/success", label: { mr: "यशोगाथा", en: "Success" } },
-  { to: "/workshops", label: { mr: "मार्गदर्शन / कार्यशाळा", en: "Workshops" } },
-  { to: "/books", label: { mr: "पुस्तके", en: "Books" } },
+  // { to: "/workshops", label: { mr: "मार्गदर्शन / कार्यशाळा", en: "Workshops" } },
+  // { to: "/books", label: { mr: "पुस्तके", en: "Books" } },
   { to: "/gallery", label: { mr: "गॅलरी", en: "Gallery" } },
   { to: "/contact", label: { mr: "संपर्क", en: "Contact" } },
 ] as const;
